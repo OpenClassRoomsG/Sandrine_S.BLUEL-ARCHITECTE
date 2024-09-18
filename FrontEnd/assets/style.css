@@ -82,21 +82,28 @@ h2{
 	font-family: 'Syne';
 	font-weight: 700;
 	font-size: 30px;
-	color: #1D6154
+	color: #1D6154;
+	text-align:center;
 }
+
 nav ul {
 	display: flex;
 	align-items: center;
 	list-style-type: none;
-
+	a{
+	color: black;
+	text-decoration: none;
+	
+	}
 }
 nav li {
-	padding: 0 10px;
+	padding: 0 30px;
 	font-size: 1.2em;
 }
 
 li:hover {
-	color: #B1663C;
+	color: black;
+	font-weight: bold;
 }
 #introduction {
 	display: flex;
@@ -122,11 +129,32 @@ li:hover {
 	margin-bottom: 0.5em;
 }
 
+.portfolio-content {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap : 45px;
+	margin-bottom: 90px;
+	margin-top: 120px;
+}
 
-#portfolio h2 {
-	text-align: center;
-	margin-bottom: 1em;
-	margin-top: 100px;
+.portfolio-content span {
+    display: flex; /* Aligne l'icône et le bouton horizontalement */
+    align-items: center; /* Centre verticalement l'icône et le bouton */
+    gap: 5px; /* Espace entre l'icône et le bouton */
+	
+}
+#openModalBtn {
+	font-size: 16px;
+	border: none;
+	background-color: white;
+	
+}
+.fa-pen-to-square {
+	font-size: 16px;
+}
+span.hidden {
+	display: none;
 }
 
 /** Boutons Filtre **/
@@ -159,13 +187,13 @@ li:hover {
 
 
 
-
 .gallery {
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	grid-column-gap: 20px;
 	grid-row-gap: 20px;
+	position: relative;
 }
 
 .gallery img {
@@ -191,7 +219,7 @@ margin: auto;
 }
 
 #contact input {
-	height: 50px;
+	height: 51px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
@@ -214,10 +242,310 @@ input[type="submit"]{
 	text-align: center;
 	border-radius: 60px ;
 }
+/**.text_pwd a {
+	color: black;
+	size: 14px;
+}**/
+
 
 footer nav ul {
 	display: flex;
 	justify-content: flex-end;
 	margin: 2em
 }
+/*** LOGIN ***/
+#login {
+	width: 50%;
+margin: auto;
+}
+#login > * {
+	text-align: center;
 
+}
+#login h2{
+	margin-bottom: 20px;
+}
+#login p{
+	color: red;
+	font-weight: bold;
+	font-size: 18px;
+}
+
+#login form {
+	text-align: left;
+	margin-top:30px;
+	display: flex;
+	flex-direction: column;
+}
+
+#login input {
+	height: 60px;
+	font-size: 1.2em;
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+#login label {
+	margin: 2em 0 1em 0;
+}
+
+#login input[type="submit"]{
+	font-family: 'Syne';
+	font-weight: 700;
+	color: white;
+	background-color: #1D6154;
+	margin : 2em auto ;
+	width: 250px;
+	text-align: center;
+	border-radius: 60px ;
+	margin-left: 100px;
+}
+/* Style pour le hover */
+#login input[type="submit"]:hover {
+	color: #1D6154;
+	border: 2px solid #1D6154;
+	background-color: white;
+}
+
+
+
+.oubli_pdw a {
+	margin-left: 145px;
+	color: black;
+}
+
+
+
+#login textarea {
+	border: none;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+ /************* MODALE  *****************/
+
+/* Mise en page de la modale  */
+.modal {
+    position: fixed; /* Reste à l'écran même en défilement */
+    z-index: 1; /* Au-dessus de tout le reste */
+    left: 0;
+    top: 0;
+    width: 100%; /* Largeur totale */
+    height: 100%; /* Hauteur totale */
+    overflow: auto; /* Activer le défilement si nécessaire */
+    background-color: rgba(0, 0, 0, 0.5); /* Fond noir semi-transparent */
+	display: none;
+	}
+
+/* Mise en page de la modale 1*/
+.modal-content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+    background-color: #fefefe;
+	border-radius: 15px;
+    margin: 15% auto; /* Centrer verticalement */
+    border: 1px solid #888;
+    width: 50%; 
+	height: 100%;
+	position: relative;
+	h3 {
+		color: black;
+		font-size: 30px;
+		margin-top: 45px;
+  		}
+	}
+
+
+/* Bouton pour fermer la modale */
+.close {
+    right: 45px;
+	top: 25px;
+    font-size: 30px;
+    font-weight: bold;
+	position: absolute;
+}
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+/** Emplacement de la modale pour injecter les photos **/
+.photoModal {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adaptation dynamique des colonnes */
+    gap: 10px; /* Espacement entre les images */
+    padding: 10px;
+	position: relative;
+}
+
+/* Style pour chaque image dans la modale */
+.photoModal img {
+    width: 100%; /* L'image prend la largeur du conteneur parent (figure) */
+    height: auto; /* Maintenir le ratio d'aspect */
+    object-fit: cover; /* Couper l'image pour remplir la boîte si nécessaire */
+    border-radius: 5px; /* Coins arrondis pour un style plus doux */
+}
+/** Bouton pour ajouter les photos **/
+.bouton2 {
+	font-family: 'Syne';
+	font-size: 17px;
+	color: white;
+	background-color: #1D6154;
+	width: 265px;
+	height: 45px;
+	text-align: center;
+	border-radius: 30px;
+}
+/* Style pour le hover */
+.bouton2:hover {
+	color: #1D6154;
+	border: 2px solid #1D6154;
+	background-color: white;
+}
+
+/** Conteneur de l'image (figure) **/
+.photoModal figure {
+    position: relative; 
+
+    
+}
+/** Icone de la Poubelle **/
+.photoModal i.fa-trash-can {
+    position: absolute; 
+    top: 8px; 
+    right: 8px; 
+    font-size: 14px;
+    color: white; 
+    cursor: pointer; 
+    background: black; 
+   	padding: 5px; 
+}
+.trait {
+	border : 1px solid;
+	color: #c9c5c5;
+	width: 80%;
+}
+
+/* Mise en page de la modale 2*/
+
+.modalAdd {
+	display: none;
+	justify-content: space-around;
+	flex-direction: column;
+	align-items: center;
+	background-color: white;
+	width: 50%;
+	height: 85%;
+	border-radius: 20px;
+	position :relative;
+	margin: 15% auto; /* Centrer verticalement */
+    border: 1px solid #888;
+}
+	.fa-arrow-left {
+		position: absolute;
+		cursor: pointer;
+		font-size: 20px;
+		top :31px;
+		left: 36px;
+	}
+	h3 {
+		color: black;
+		font-size: 30px;
+		
+		}
+	
+
+.bouton3 {
+	font-family: 'Syne';
+	font-size: 17px;
+	color: white;
+	background-color: #1D6154;
+	width: 265px;
+	height: 45px;
+	text-align: center;
+	border-radius: 30px ;
+	margin: 0 auto;
+	margin-top: 20px;
+	cursor: pointer;
+}
+/* Style pour le hover */
+.bouton3:hover {
+	color: #1D6154;
+	border: 2px solid #1D6154;
+	background-color: white;
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 60%;
+	gap:10px;
+	
+}
+.containerAdd {
+	background-color: #e8f1f6;
+	height: 200px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	
+	border-radius: 5px;
+}
+.containerAdd label { 
+	background-color: #b9c5cc;
+	width: 50%;
+	height: 30%;
+	border-radius: 30px;
+	color:  #306685;
+	cursor: pointer;
+	font-size: 17px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: bold;
+}
+.containerAdd input {
+		display: none;
+	}
+
+.fa-image {
+	font-size: 65px;
+	color:#b9c5cc;;
+}
+.containerAdd img {
+		display: none;
+		max-width: 100%;
+		height: 100%;
+	}
+	.trait2 {
+		border : 1px solid;
+		color: #c9c5c5;
+		width: 100%;
+		margin-top: 30px;
+	}
+	#title, #category { 
+		width: 100%;
+		height: 51px;
+		border: none;
+		box-shadow: 0px 4px 14px 0px rgba(0, 0, 0, 0.09);
+		margin-top: 10px;
+		font-size: 1.2rem;
+		background-color: white;
+	}
+
+.active {
+background-color: #1D6154;
+color: white;
+}
+
+.admin-panel {
+	height: 50px;
+	color: white;
+	background-color: black;
+	display: none;
+	justify-content: center;
+	align-items: center;
+}
