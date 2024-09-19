@@ -10,7 +10,7 @@ function requestLogin() {
         headers: {
             "Content-type": "application/json"
         },
-        body: JSON.stringify({// Convertir en hain de caractères //
+        body: JSON.stringify({// Convertir en chaine de caractères Json//
             "email": stockInputEmail,
             "password": stockInputPassword,
         })

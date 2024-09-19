@@ -110,7 +110,7 @@ if (token) {
     logoutButton.addEventListener('click', (e) => {
         e.preventDefault()
         sessionStorage.removeItem('token')
-        location.reload()
+        location.reload() // Recharger la page //
     })
 }
 

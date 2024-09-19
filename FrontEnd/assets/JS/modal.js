@@ -151,6 +151,15 @@ markAdd.addEventListener("click", () => {
 displayModalAdd(); /** On appelle la fonction **/
 
 
+// Vérification que la taille du fichier < 4MO //
+function checkFileSize(file) {
+    const maxSizeInBytes = 4 * 1024 * 1024; // 4 Mo en octets
+    if (file.size > maxSizeInBytes) {
+        alert("Le fichier est trop volumineux. La taille maximale autorisée est de 4 Mo.");
+        return false;
+    }
+    return true;
+}
 
 // Prévisualisation de l'image //
 
@@ -165,11 +174,11 @@ const pFile = document.querySelector(".containerAdd p")
 inputFile.addEventListener("change",()=> {
     const file  = inputFile.files[0] // On récupère le fichier sélectionné //
 
- // Vérifier si un fichier est sélectionné et si c'est une image (Code JS)//
- if (file && file.type.startsWith("image/")) {
+ // Vérifier si un fichier est sélectionné et si c'est une image et si la taille est respectée//
+ if (file && file.type.startsWith("image/") && checkFileSize(file)) {
     const reader = new FileReader(); // Créer un FileReader pour lire le contenu du fichier
 
-    reader.onload = function(e) {
+    reader.onload = function(e) { // Fonction pour prévisualisr les images et les lire //
         previewImg.src = e.target.result; // Met à jour la source de l'image avec le contenu du fichier
         previewImg.style.display = "block"; // Affiche l'image de prévisualisation
         labelFile.style.display = "none"; // Cache le label "Ajouter photo"
@@ -179,8 +188,10 @@ inputFile.addEventListener("change",()=> {
     reader.readAsDataURL(file); // Lire le fichier comme URL de données
 }
 else {
-// Gérer le cas où le fichier sélectionné n'est pas une image
+// Gérer le cas où le fichier sélectionné n'est pas une image ou trop volumineux 
+if (!file || !file.type.startsWith("image/")) {
     alert("Veuillez sélectionner un fichier image valide (jpg, png).");
+}
     inputFile.value = ""; // Réinitialiser l'input file
     previewImg.style.display = "none"; // Masquer l'image si elle est affichée
     labelFile.style.display = "block"; // Rendre le label visible à nouveau

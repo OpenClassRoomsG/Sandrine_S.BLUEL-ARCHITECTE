@@ -342,11 +342,12 @@ margin: auto;
 	align-items: center;
 	justify-content: space-around;
     background-color: #fefefe;
-	border-radius: 15px;
-    margin: 15% auto; /* Centrer verticalement */
+	border-radius: 10px;
+    margin: 23% auto; /* Centrer verticalement */
     border: 1px solid #888;
-    width: 50%; 
-	height: 100%;
+    width: 70%; 
+	height: fit-content;
+	min-height: 400px;
 	position: relative;
 	h3 {
 		color: black;
@@ -377,6 +378,7 @@ margin: auto;
     gap: 10px; /* Espacement entre les images */
     padding: 10px;
 	position: relative;
+	width: 68%;
 }
 
 /* Style pour chaque image dans la modale */
@@ -396,6 +398,7 @@ margin: auto;
 	height: 45px;
 	text-align: center;
 	border-radius: 30px;
+	margin: 23px;
 }
 /* Style pour le hover */
 .bouton2:hover {
@@ -435,9 +438,9 @@ margin: auto;
 	flex-direction: column;
 	align-items: center;
 	background-color: white;
-	width: 50%;
+	width: 65%;
 	height: 85%;
-	border-radius: 20px;
+	border-radius: 10px;
 	position :relative;
 	margin: 15% auto; /* Centrer verticalement */
     border: 1px solid #888;
@@ -460,7 +463,7 @@ margin: auto;
 	font-family: 'Syne';
 	font-size: 17px;
 	color: white;
-	background-color: #1D6154;
+	background-color: #A7A7A7;
 	width: 265px;
 	height: 45px;
 	text-align: center;
@@ -468,12 +471,13 @@ margin: auto;
 	margin: 0 auto;
 	margin-top: 20px;
 	cursor: pointer;
+	border: none;
 }
 /* Style pour le hover */
 .bouton3:hover {
-	color: #1D6154;
+	background-color: #1D6154;
 	border: 2px solid #1D6154;
-	background-color: white;
+	color: white;
 }
 
 form {
@@ -491,13 +495,13 @@ form {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	
 	border-radius: 5px;
+	gap: 10px;
 }
 .containerAdd label { 
 	background-color: #b9c5cc;
 	width: 50%;
-	height: 30%;
+	height: 15%;
 	border-radius: 30px;
 	color:  #306685;
 	cursor: pointer;
@@ -548,4 +552,5 @@ color: white;
 	display: none;
 	justify-content: center;
 	align-items: center;
+	gap : 10px
 }
