@@ -18,7 +18,6 @@ console.log(token)
         const response = await fetch("http://localhost:5678/api/works"); // Attendre que le fichier soit généré //
         const data = await response.json() ;// Convertir en .json//
         works = data; // Enregistrer les données dans works //
-        return works;
 }
 
 // Affichage des Works dans le DOM //
@@ -37,8 +36,7 @@ function affichageWorks(arrayWorks) {
 }
 
 async function updateUI() {
-    const data = await getWorks()
-    affichageWorks(data)
+    affichageWorks(works)
 }
 
 
@@ -87,21 +85,78 @@ function createCategories(arrayCategories) {
     });
 }
 
+function displayPhotos(works) {
+    photoModal.innerHTML = ""; // Réinitialiser le contenu
+
+        // Boucle à travers chaque travail pour afficher les images
+        works.forEach(work => {
+            const figure = document.createElement("figure");
+            const img = document.createElement("img");
+            const span = document.createElement("span");
+            const trash = document.createElement("i"); // Emplacement Poubelle
+            trash.classList.add("fa-solid", "fa-trash-can"); // Icone Poubelle
+            trash.setAttribute("data-id", work.id); // Utilisation de data-id pour l'identifiant 
+
+// Evènement de la suppression //
+trash.addEventListener("click",(e) => {
+            const id = trash.getAttribute("data-id"); // On récupère l'ID
+            const init = {
+                // Paramètres pour Fetch API
+                method: "DELETE", // Méthode correcte
+                headers: {
+                    "Accept": "application/json",
+                    "Content-Type": "application/json",
+                    "Authorization": "Bearer " + sessionStorage.getItem("token"),
+                },
+            }
+
+            fetch("http://localhost:5678/api/works/" + id, init) // Supprime l'élément avec l'ID
+                .then((response) => {
+                    if (!response.ok) {
+                        console.log("La suppression n'a pas abouti!");
+                        return; // Arrête l'exécution si la suppression échoue
+                    }
+                })
+                .then(() => { // On récupère les données
+                    console.log("La suppression a réussi :"); // On récupère les données //
+                    works = works.filter(work => work.id !== Number(id))
+                    displayPhotos(works); // Mise à jour de l'affichage après suppression
+                    affichageWorks(works)
+                })
+                                  
+                .catch((error) => {
+                    console.error("La suppression n'a pas réussie !:", error); // Gestion des erreurs
+                });
+        });
+
+
+            img.src = work.imageUrl; // Pour chaque work, Url identifié
+            img.alt = work.title || "Image"; // Texte alternatif pour l'image
+            span.appendChild(trash); // Ajoute l'icône poubelle dans le span
+            figure.appendChild(span);
+            figure.appendChild(img);
+            photoModal.appendChild(figure); // Ajoute le figure à la galerie
+        });
+    
+}
+
 
 
 async function init() {
-   await getWorks()
-   await getCategories()
-   affichageWorks(works)
-   createCategories(categories)
+    await getWorks()
+    await getCategories()
+    affichageWorks(works)
+    displayPhotos(works); 
+    createCategories(categories)
 
 }
 
 init()
+
+// Si l'utilisateur est connecté, afficher l'icone et le bouton "modifié"et cacher les filtres //
 const admiModif = document.querySelector(".portfolio-content span"); // Sélectionner l'élément span qui contient l'icône et le bouton "modifier
 if (token) {
-    // Si l'utilisateur est connecté, afficher l'icone et le bouton "modifié"et cacher les filtres //
-    admiModif.classList.remove('hidden'); 
+        admiModif.classList.remove('hidden'); 
     document.querySelector('.admin-panel').style.display = "flex"
     filters.style.display = "none"
     admiModif.style.display="flex"

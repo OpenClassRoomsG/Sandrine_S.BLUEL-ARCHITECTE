@@ -343,11 +343,10 @@ margin: auto;
 	justify-content: space-around;
     background-color: #fefefe;
 	border-radius: 10px;
-    margin: 23% auto; /* Centrer verticalement */
+    margin: 11% auto; /* Centrer verticalement */
     border: 1px solid #888;
-    width: 70%; 
-	height: fit-content;
-	min-height: 400px;
+    width: 630px; 
+	height: 688px;
 	position: relative;
 	h3 {
 		color: black;
@@ -374,11 +373,10 @@ margin: auto;
 /** Emplacement de la modale pour injecter les photos **/
 .photoModal {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Adaptation dynamique des colonnes */
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); /* Adaptation dynamique des colonnes */
     gap: 10px; /* Espacement entre les images */
-    padding: 10px;
-	position: relative;
-	width: 68%;
+    position: relative;
+	width: 80%;
 }
 
 /* Style pour chaque image dans la modale */
@@ -438,11 +436,11 @@ margin: auto;
 	flex-direction: column;
 	align-items: center;
 	background-color: white;
-	width: 65%;
-	height: 85%;
+	width: 630px;
+	height: 670px;
 	border-radius: 10px;
 	position :relative;
-	margin: 15% auto; /* Centrer verticalement */
+	margin: 4% auto; /* Centrer verticalement */
     border: 1px solid #888;
 }
 	.fa-arrow-left {
@@ -490,7 +488,7 @@ form {
 }
 .containerAdd {
 	background-color: #e8f1f6;
-	height: 200px;
+	height: 170px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
